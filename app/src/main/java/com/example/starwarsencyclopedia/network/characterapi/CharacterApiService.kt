@@ -30,7 +30,7 @@ interface CharacterApiService {
 }
 
 object CharacterApi {
-    val retrofitService : CharacterApiService by lazy {
+    val retrofitService: CharacterApiService by lazy {
         retrofit.create(CharacterApiService::class.java)
     }
 }

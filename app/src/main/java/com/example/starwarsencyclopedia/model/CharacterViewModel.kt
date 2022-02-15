@@ -4,25 +4,31 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.starwarsencyclopedia.network.characterapi.Character
 import com.example.starwarsencyclopedia.network.characterapi.CharacterApi
+import com.example.starwarsencyclopedia.network.characterapi.Character
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
+enum class CharacterApiStatus {LOADING, ERROR, DONE}
+
 class CharacterViewModel: ViewModel() {
 
-    private val _status = MutableLiveData<String>()
-    val status: LiveData<String> = _status
+    private val _status = MutableLiveData<CharacterApiStatus>()
+    val status: LiveData<CharacterApiStatus> = _status
 
     private val _characterList = MutableLiveData<List<Character>>()
     val characterList: LiveData<List<Character>> = _characterList
 
+    private val _currentCharacter = MutableLiveData<Character>()
+    val currentCharacter: LiveData<Character> = _currentCharacter
+
     init {
-        getCharactersFromApi()
+        getCharacterList()
     }
 
-    private fun getCharactersFromApi() {
+    private fun getCharacterList() {
         viewModelScope.launch {
+            _status.value = CharacterApiStatus.LOADING
             try {
                 val currentList = mutableListOf<Character>()
                 currentList.addAll(
@@ -33,13 +39,16 @@ class CharacterViewModel: ViewModel() {
                         CharacterApi.retrofitService.getDesiredPage(page).results
                     )
                 }
-
                 _characterList.value = currentList
-                _status.value = currentList[81].name
+                _status.value = CharacterApiStatus.DONE
             } catch (e: Exception) {
-                _status.value = "Error: $e"
+                _status.value = CharacterApiStatus.ERROR
                 _characterList.value = listOf()
             }
         }
+    }
+
+    fun onCharacterClicked(character: Character) {
+        _currentCharacter.value = character
     }
 }

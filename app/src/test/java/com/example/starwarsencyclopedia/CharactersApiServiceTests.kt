@@ -33,11 +33,12 @@ class CharactersApiServiceTests : BaseTest() {
     fun api_service() {
         enqueue("star_wars_characters.json")
         runBlocking {
-            val apiResponse = service.getFirstPage()
+            val apiResponse = service.getFirstPage().results
 
             assertNotNull(apiResponse)
-            //assertTrue("The list was empty", apiResponse.isNotEmpty())
-            //assertEquals("The id's did not match", "424905", apiResponse[0].id)
+            assertTrue("The list was empty", apiResponse.isNotEmpty())
+            assertEquals("The names did not match",
+                "Luke Skywalker", apiResponse[0].name)
         }
     }
 }

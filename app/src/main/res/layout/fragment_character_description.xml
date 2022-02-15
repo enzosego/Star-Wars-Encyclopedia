@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.starwarsencyclopedia.model.CharacterViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:contentPadding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardCornerRadius="6dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:text="@{viewModel.currentCharacter.name}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Anakin Skywalker"/>
+
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:paddingStart="16dp"
+                    android:text="@{@string/gender(viewModel.currentCharacter.gender)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name"
+                    tools:text="Gender: Female"/>
+
+                <TextView
+                    android:id="@+id/height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:text="@{@string/height(viewModel.currentCharacter.height)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gender"
+                    tools:text="Height: 172cm"/>
+
+                <TextView
+                    android:id="@+id/weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:text="@{@string/weight(viewModel.currentCharacter.weight)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/height"
+                    tools:text="Weight: 82kg"/>
+
+                <TextView
+                    android:id="@+id/skin_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:text="@{@string/skin_color(viewModel.currentCharacter.skinColor)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weight"
+                    tools:text="Skin Color: Black"/>
+
+                <TextView
+                    android:id="@+id/hair_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:text="@{@string/hair_color(viewModel.currentCharacter.hairColor)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/skin_color"
+                    tools:text="Hair Color: Blond"/>
+
+                <TextView
+                    android:id="@+id/eye_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:text="@{@string/eye_color(viewModel.currentCharacter.eyeColor)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hair_color"
+                    tools:text="Eye Color: Blue"/>
+
+                <TextView
+                    android:id="@+id/birth_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:text="@{@string/birth_year(viewModel.currentCharacter.birthYear)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/eye_color"
+                    tools:text="Birth Year: 1997"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
