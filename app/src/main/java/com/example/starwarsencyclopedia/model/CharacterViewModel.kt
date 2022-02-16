@@ -11,7 +11,9 @@ import java.lang.Exception
 
 enum class CharacterApiStatus {LOADING, ERROR, DONE}
 
-class CharacterViewModel: ViewModel() {
+class CharacterViewModel(
+    fakeList: MutableList<List<Character>> = mutableListOf()
+): ViewModel() {
 
     private val _status = MutableLiveData<CharacterApiStatus>()
     val status: LiveData<CharacterApiStatus> = _status
@@ -28,7 +30,12 @@ class CharacterViewModel: ViewModel() {
     val currentCharacter: LiveData<Character> = _currentCharacter
 
     init {
-        getCharacterPages()
+        if (fakeList.isEmpty())
+            getCharacterPages()
+        else {
+            _pagesList.value = fakeList
+            updateCurrentPage(0)
+        }
     }
 
     private fun getCharacterPages() {
@@ -52,7 +59,6 @@ class CharacterViewModel: ViewModel() {
 
                 _pagesList.value = newList
                 updateCurrentPage(0)
-
                 _status.value = CharacterApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = CharacterApiStatus.ERROR
