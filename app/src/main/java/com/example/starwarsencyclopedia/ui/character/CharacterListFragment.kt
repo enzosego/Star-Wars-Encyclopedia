@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.starwarsencyclopedia.R
@@ -16,7 +17,7 @@ import com.example.starwarsencyclopedia.model.CharacterViewModel
 
 class CharacterListFragment : Fragment() {
 
-    private val viewModel: CharacterViewModel by viewModels()
+    private val viewModel: CharacterViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +32,6 @@ class CharacterListFragment : Fragment() {
 
         binding.characterListRecycler.adapter = CharacterListAdapter(CharacterListener { character ->
             viewModel.onCharacterClicked(character)
-            Log.d("debug", viewModel.currentCharacter.value!!.name)
             findNavController()
                 .navigate(R.id.action_characterListFragment_to_characterDescriptionFragment)
         })

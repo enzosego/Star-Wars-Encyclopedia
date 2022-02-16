@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">Star Wars Encyclopedia</string>
     <string name="gender">Gender: %1$s</string>
-    <string name="height">Height: %1$s</string>
-    <string name="weight">Weight: %1$s</string>
+    <string name="height">Height: %1$scm</string>
+    <string name="weight">Weight: %1$skg</string>
     <string name="skin_color">Skin Color: %1$s</string>
     <string name="hair_color">Hair Color: %1$s</string>
     <string name="eye_color">Eye Color: %1$s</string>
     <string name="birth_year">Birth Year: %1$s</string>
+    <string name="next_button">Next</string>
+    <string name="back_button">Back</string>
 </resources>
