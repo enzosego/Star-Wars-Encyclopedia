@@ -29,6 +29,8 @@ class CharacterViewModel(
     private val _currentCharacter = MutableLiveData<Character>()
     val currentCharacter: LiveData<Character> = _currentCharacter
 
+    val isDescriptionDisplayed = MutableLiveData(false)
+
     init {
         if (fakeList.isEmpty())
             getCharacterPages()
@@ -84,5 +86,10 @@ class CharacterViewModel(
 
     fun onCharacterClicked(character: Character) {
         _currentCharacter.value = character
+        switchDescriptionDisplayStatus(true)
+    }
+
+    fun switchDescriptionDisplayStatus(newValue: Boolean) {
+        isDescriptionDisplayed.value = newValue
     }
 }

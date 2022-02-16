@@ -3,6 +3,7 @@ package com.example.starwarsencyclopedia
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsencyclopedia.adapter.CharacterListAdapter
@@ -28,6 +29,21 @@ fun bindStatus(statusImageView: ImageView, status: CharacterApiStatus?) {
         CharacterApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
+        }
+    }
+}
+
+@BindingAdapter("bottomMenuVisibility")
+fun bottomMenuVisibility(bottomMenu: ConstraintLayout, status: CharacterApiStatus?) {
+    when(status) {
+        CharacterApiStatus.LOADING -> {
+            bottomMenu.visibility = View.GONE
+        }
+        CharacterApiStatus.DONE -> {
+            bottomMenu.visibility = View.VISIBLE
+        }
+        CharacterApiStatus.ERROR -> {
+            bottomMenu.visibility = View.GONE
         }
     }
 }

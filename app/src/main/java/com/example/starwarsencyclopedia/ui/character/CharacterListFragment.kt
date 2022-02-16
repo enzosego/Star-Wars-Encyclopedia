@@ -1,19 +1,19 @@
 package com.example.starwarsencyclopedia.ui.character
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.starwarsencyclopedia.R
 import com.example.starwarsencyclopedia.adapter.CharacterListAdapter
 import com.example.starwarsencyclopedia.adapter.CharacterListener
 import com.example.starwarsencyclopedia.databinding.FragmentCharacterListBinding
 import com.example.starwarsencyclopedia.model.CharacterViewModel
+import kotlin.system.exitProcess
 
 class CharacterListFragment : Fragment() {
 
@@ -35,6 +35,8 @@ class CharacterListFragment : Fragment() {
             findNavController()
                 .navigate(R.id.action_characterListFragment_to_characterDescriptionFragment)
         })
+
+        viewModel.switchDescriptionDisplayStatus(false)
 
         return binding.root
     }
