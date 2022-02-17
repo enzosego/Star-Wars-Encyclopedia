@@ -34,6 +34,9 @@ class CharacterViewModel(
     private val _isUserSearching = MutableLiveData(false)
     val isUserSearching: LiveData<Boolean> = _isUserSearching
 
+    private val _isApiCallOver = MutableLiveData(false)
+    val isApiCallOver: LiveData<Boolean> = _isApiCallOver
+
     init {
         if (fakeList.isEmpty())
             getCharacters()
@@ -57,6 +60,7 @@ class CharacterViewModel(
                     )
                 }
 
+                _isApiCallOver.value = !_isApiCallOver.value!!
                 _characterList.value = newList
                 updateCurrentPage(0)
                 _status.value = CharacterApiStatus.DONE
@@ -84,7 +88,6 @@ class CharacterViewModel(
     fun filterCharacters(input: String?) {
         if (input.isNullOrBlank())
             return
-        switchSearchingStatus(true)
 
         val filteredList = _characterList.value!!
             .filter { (name) ->
@@ -115,7 +118,7 @@ class CharacterViewModel(
     fun onCharacterClicked(character: Character) {
         _currentCharacter.value = character
         switchDescriptionDisplayStatus(true)
-        _isUserSearching.value = false
+        switchSearchingStatus(false)
     }
 
     fun switchSearchingStatus(newValue: Boolean) {

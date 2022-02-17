@@ -2,6 +2,7 @@ package com.example.starwarsencyclopedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
 import androidx.activity.viewModels
@@ -32,13 +33,23 @@ class MainActivity : AppCompatActivity() {
 
         val menuItem = menu.findItem(R.id.action_search)
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            menuItem.isVisible = destination.id != R.id.characterDescriptionFragment
+            invalidateOptionsMenu()
+        }
+
+        menuItem.setOnMenuItemClickListener {
+            viewModel.switchSearchingStatus(true)
+            false
+        }
+
+        menuItem.isVisible = viewModel.isApiCallOver.value!!
+
         val searchView = menuItem.actionView as SearchView
         searchView.queryHint = "Anakin Skywalker"
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
 
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
+            override fun onQueryTextSubmit(query: String?): Boolean = false
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.filterCharacters(newText)

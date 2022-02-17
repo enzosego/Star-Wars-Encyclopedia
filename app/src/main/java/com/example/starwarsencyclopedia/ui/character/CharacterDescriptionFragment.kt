@@ -1,12 +1,13 @@
 package com.example.starwarsencyclopedia.ui.character
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.starwarsencyclopedia.R
 import com.example.starwarsencyclopedia.databinding.FragmentCharacterDescriptionBinding
 import com.example.starwarsencyclopedia.model.CharacterViewModel
 
@@ -24,10 +25,6 @@ class CharacterDescriptionFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
-
-        if (viewModel.currentCharacter.value != null) {
-            Log.d("debug", viewModel.currentCharacter.value!!.name)
-        }
 
         return binding.root
     }

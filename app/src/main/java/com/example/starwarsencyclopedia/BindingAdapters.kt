@@ -33,14 +33,18 @@ fun bindStatus(statusImageView: ImageView, status: CharacterApiStatus?) {
     }
 }
 
-@BindingAdapter("bottomMenuVisibility")
-fun bottomMenuVisibility(bottomMenu: ConstraintLayout, status: CharacterApiStatus?) {
+@BindingAdapter(value = ["status", "isUserSearching"])
+fun bottomMenuVisibility(bottomMenu: ConstraintLayout, status: CharacterApiStatus?, isUserSearching: Boolean) {
     when(status) {
         CharacterApiStatus.LOADING -> {
             bottomMenu.visibility = View.GONE
         }
         CharacterApiStatus.DONE -> {
-            bottomMenu.visibility = View.VISIBLE
+            if (!isUserSearching) {
+                bottomMenu.visibility = View.VISIBLE
+            } else {
+                bottomMenu.visibility = View.GONE
+            }
         }
         CharacterApiStatus.ERROR -> {
             bottomMenu.visibility = View.GONE
