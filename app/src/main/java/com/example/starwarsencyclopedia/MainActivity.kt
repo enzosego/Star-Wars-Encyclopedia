@@ -2,6 +2,8 @@ package com.example.starwarsencyclopedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import androidx.appcompat.widget.SearchView
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -24,11 +26,39 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
+        menuInflater.inflate(R.menu.search_toolbar, menu)
+
+        val menuItem = menu.findItem(R.id.action_search)
+
+        val searchView = menuItem.actionView as SearchView
+        searchView.queryHint = "Anakin Skywalker"
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.filterCharacters(newText)
+                return false
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onBackPressed() {
-        if (viewModel.currentPageNum.value!! > 0 && !viewModel.isDescriptionDisplayed.value!!)
-            viewModel.pageDown()
-        else
-            super.onBackPressed()
+        with (viewModel) {
+            if (isUserSearching.value!!) {
+                refreshList()
+                switchSearchingStatus(false)
+            } else if (currentPageNum.value!! > 0 && !isDescriptionDisplayed.value!!) {
+                pageDown()
+            } else
+                super.onBackPressed()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

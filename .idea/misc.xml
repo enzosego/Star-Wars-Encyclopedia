@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/layout/fragment_character_list.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_list_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_view_item.xml" value="0.22" />
+        <entry key="app/src/main/res/menu/search_toolbar.xml" value="0.18" />
       </map>
     </option>
   </component>

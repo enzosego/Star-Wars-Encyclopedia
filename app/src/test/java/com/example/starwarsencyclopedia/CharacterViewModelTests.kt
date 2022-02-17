@@ -2,10 +2,13 @@ package com.example.starwarsencyclopedia
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.starwarsencyclopedia.model.CharacterViewModel
+import com.example.starwarsencyclopedia.network.characterapi.Character
+import com.example.starwarsencyclopedia.network.characterapi.CharacterApi
 import com.example.starwarsencyclopedia.network.characterapi.CharacterApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,16 +38,17 @@ class CharacterViewModelTests : BaseTest() {
             .build()
             .create(CharacterApiService::class.java)
 
-        viewModel = CharacterViewModel(FakeList.list)
     }
 
     @Test
     fun buttons_work_as_intended() {
+        viewModel = CharacterViewModel(FakeList.list)
+
         viewModel.pageUp()
         viewModel.pageUp()
         viewModel.pageDown()
 
         assertEquals(1, viewModel.currentPageNum.value!!)
-        assertEquals(FakeList.list[1], viewModel.currentPage.value!!)
+        assertEquals(FakeList.list[11], viewModel.currentPage.value!![1])
     }
 }

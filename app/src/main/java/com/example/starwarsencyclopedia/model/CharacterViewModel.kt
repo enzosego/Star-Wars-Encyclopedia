@@ -12,13 +12,13 @@ import java.lang.Exception
 enum class CharacterApiStatus {LOADING, ERROR, DONE}
 
 class CharacterViewModel(
-    fakeList: MutableList<List<Character>> = mutableListOf()
+    fakeList: List<Character> = mutableListOf()
 ): ViewModel() {
 
     private val _status = MutableLiveData<CharacterApiStatus>()
     val status: LiveData<CharacterApiStatus> = _status
 
-    private val _pagesList = MutableLiveData<MutableList<List<Character>>>()
+    private val _characterList = MutableLiveData<List<Character>>()
 
     private val _currentPage = MutableLiveData<List<Character>>()
     val currentPage: LiveData<List<Character>> = _currentPage
@@ -31,40 +31,38 @@ class CharacterViewModel(
 
     val isDescriptionDisplayed = MutableLiveData(false)
 
+    private val _isUserSearching = MutableLiveData(false)
+    val isUserSearching: LiveData<Boolean> = _isUserSearching
+
     init {
         if (fakeList.isEmpty())
-            getCharacterPages()
+            getCharacters()
         else {
-            _pagesList.value = fakeList
+            _characterList.value = fakeList
             updateCurrentPage(0)
         }
     }
 
-    private fun getCharacterPages() {
+    private fun getCharacters() {
         viewModelScope.launch {
             _status.value = CharacterApiStatus.LOADING
             try {
-                val newList = mutableListOf<List<Character>>()
-                val firstPage = mutableListOf<Character>()
-                firstPage.addAll(
+                val newList = mutableListOf<Character>()
+                newList.addAll(
                     CharacterApi.retrofitService.getFirstPage().results
                 )
-                newList.add(firstPage)
-
                 for (index in 2..9) {
-                    val newPage = mutableListOf<Character>()
-                    newPage.addAll(
+                    newList.addAll(
                         CharacterApi.retrofitService.getDesiredPage(index).results
                     )
-                    newList.add(newPage)
                 }
 
-                _pagesList.value = newList
+                _characterList.value = newList
                 updateCurrentPage(0)
                 _status.value = CharacterApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = CharacterApiStatus.ERROR
-                _pagesList.value = mutableListOf()
+                _characterList.value = listOf()
             }
         }
     }
@@ -79,14 +77,49 @@ class CharacterViewModel(
         updateCurrentPage(_currentPageNum.value!!)
     }
 
+    fun refreshList() {
+        updateCurrentPage(_currentPageNum.value!!)
+    }
+
+    fun filterCharacters(input: String?) {
+        if (input.isNullOrBlank())
+            return
+        switchSearchingStatus(true)
+
+        val filteredList = _characterList.value!!
+            .filter { (name) ->
+                val splitName = name.split(" ")
+                if (splitName.size == 1)
+                    splitName[0].startsWith(input, true)
+                else
+                    splitName[0].startsWith(input, true)
+                            || splitName[1].startsWith(input, true)
+            }
+
+        _currentPage.value = filteredList
+    }
+
     private fun updateCurrentPage(pageNum: Int) {
-        _currentPage.value = _pagesList.value!![pageNum]
+        val newList = mutableListOf<Character>()
+        for (charNum in pageNum*10..pageNum*10+9) {
+            if (charNum > 81)
+                break
+            val newChar = _characterList.value!![charNum]
+            newList.add(newChar)
+        }
+
+        _currentPage.value = newList
         _currentPageNum.value = pageNum
     }
 
     fun onCharacterClicked(character: Character) {
         _currentCharacter.value = character
         switchDescriptionDisplayStatus(true)
+        _isUserSearching.value = false
+    }
+
+    fun switchSearchingStatus(newValue: Boolean) {
+        _isUserSearching.value = newValue
     }
 
     fun switchDescriptionDisplayStatus(newValue: Boolean) {

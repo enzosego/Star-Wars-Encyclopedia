@@ -9,4 +9,5 @@
     <string name="birth_year">Birth Year: %1$s</string>
     <string name="next_button">Next</string>
     <string name="back_button">Back</string>
+    <string name="search_title">Search</string>
 </resources>

@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/characterListFragment"
         android:name="com.example.starwarsencyclopedia.ui.character.CharacterListFragment"
-        android:label="CharacterListFragment" >
+        android:label="Character List">
         <action
             android:id="@+id/action_characterListFragment_to_characterDescriptionFragment"
             app:destination="@id/characterDescriptionFragment" />
@@ -15,5 +15,5 @@
     <fragment
         android:id="@+id/characterDescriptionFragment"
         android:name="com.example.starwarsencyclopedia.ui.character.CharacterDescriptionFragment"
-        android:label="CharacterDescriptionFragment" />
+        android:label="Description" />
 </navigation>
