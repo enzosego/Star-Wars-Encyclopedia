@@ -1,5 +1,6 @@
-package com.example.starwarsencyclopedia
+package com.example.starwarsencyclopedia.characterapi
 
+import com.example.starwarsencyclopedia.BaseTest
 import com.example.starwarsencyclopedia.network.characterapi.CharacterApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -30,15 +31,16 @@ class CharactersApiServiceTests : BaseTest() {
     }
 
     @Test
-    fun api_service() {
-        enqueue("character_page_1.json")
+    fun character_api_service_works() {
+        enqueue("fake_character_page.json")
         runBlocking {
             val apiResponse = service.getFirstPage().results
 
             assertNotNull(apiResponse)
             assertTrue("The list was empty", apiResponse.isNotEmpty())
-            assertEquals("The names did not match",
-                "Luke Skywalker", apiResponse[0].name)
+            assertEquals(
+                "The names did not match", "Luke Skywalker", apiResponse[0].name
+            )
         }
     }
 }

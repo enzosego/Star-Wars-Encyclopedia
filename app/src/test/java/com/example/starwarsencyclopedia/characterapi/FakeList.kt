@@ -1,4 +1,4 @@
-package com.example.starwarsencyclopedia
+package com.example.starwarsencyclopedia.characterapi
 
 import com.example.starwarsencyclopedia.network.characterapi.Character
 
