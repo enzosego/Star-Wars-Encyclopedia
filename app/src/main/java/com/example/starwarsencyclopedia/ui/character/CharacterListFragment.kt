@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.Observable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -23,20 +25,12 @@ class CharacterListFragment : Fragment() {
 
     private lateinit var binding: FragmentCharacterListBinding
 
-    private fun observingApiCall() {
-        viewModel.isApiCallOver.observe(viewLifecycleOwner) {
-            requireActivity().invalidateOptionsMenu()
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCharacterListBinding.inflate(inflater)
-
-        observingApiCall()
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -46,7 +40,15 @@ class CharacterListFragment : Fragment() {
                 .navigate(R.id.action_characterListFragment_to_characterDescriptionFragment)
         })
 
-        viewModel.switchDescriptionDisplayStatus(false)
+        binding.searchInput.addTextChangedListener {
+            viewModel.filterCharacters(it!!.toString())
+            if (it.isBlank()) {
+                viewModel.refreshPage()
+                viewModel.switchSearchingStatus(false)
+            }
+        }
+
+        viewModel.switchDescriptionDisplayStatus()
 
         return binding.root
     }

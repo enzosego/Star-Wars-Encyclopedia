@@ -14,6 +14,16 @@
         android:layout_height="match_parent"
         tools:context="com.example.starwarsencyclopedia.ui.character.CharacterListFragment">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_hint"
+            android:layout_margin="8dp"
+            searchInputVisibility="@{viewModel.status}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/characterListRecycler"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/characterListRecycler"
             android:layout_width="0dp"
@@ -22,10 +32,10 @@
             android:clipToPadding="false"
             characterListData="@{viewModel.currentPage}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/searchInput"
             app:layout_constraintBottom_toTopOf="@+id/button_holder"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintRight_toRightOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/button_holder"

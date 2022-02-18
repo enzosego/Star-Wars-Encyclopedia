@@ -1,5 +1,6 @@
 package com.example.starwarsencyclopedia.model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,7 +24,7 @@ class CharacterViewModel(
     private val _currentPage = MutableLiveData<List<Character>>()
     val currentPage: LiveData<List<Character>> = _currentPage
 
-    private val _currentPageNum = MutableLiveData<Int>()
+    private val _currentPageNum = MutableLiveData(0)
     val currentPageNum: LiveData<Int> = _currentPageNum
 
     private val _currentCharacter = MutableLiveData<Character>()
@@ -34,15 +35,12 @@ class CharacterViewModel(
     private val _isUserSearching = MutableLiveData(false)
     val isUserSearching: LiveData<Boolean> = _isUserSearching
 
-    private val _isApiCallOver = MutableLiveData(false)
-    val isApiCallOver: LiveData<Boolean> = _isApiCallOver
-
     init {
         if (fakeList.isEmpty())
             getCharacters()
         else {
             _characterList.value = fakeList
-            updateCurrentPage(0)
+            refreshPage()
         }
     }
 
@@ -60,9 +58,8 @@ class CharacterViewModel(
                     )
                 }
 
-                _isApiCallOver.value = !_isApiCallOver.value!!
                 _characterList.value = newList
-                updateCurrentPage(0)
+                refreshPage()
                 _status.value = CharacterApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = CharacterApiStatus.ERROR
@@ -71,35 +68,8 @@ class CharacterViewModel(
         }
     }
 
-    fun pageUp() {
-        _currentPageNum.value = _currentPageNum.value!!.inc()
+    fun refreshPage() {
         updateCurrentPage(_currentPageNum.value!!)
-    }
-
-    fun pageDown() {
-        _currentPageNum.value = _currentPageNum.value!!.dec()
-        updateCurrentPage(_currentPageNum.value!!)
-    }
-
-    fun refreshList() {
-        updateCurrentPage(_currentPageNum.value!!)
-    }
-
-    fun filterCharacters(input: String?) {
-        if (input.isNullOrBlank())
-            return
-
-        val filteredList = _characterList.value!!
-            .filter { (name) ->
-                val splitName = name.split(" ")
-                if (splitName.size == 1)
-                    splitName[0].startsWith(input, true)
-                else
-                    splitName[0].startsWith(input, true)
-                            || splitName[1].startsWith(input, true)
-            }
-
-        _currentPage.value = filteredList
     }
 
     private fun updateCurrentPage(pageNum: Int) {
@@ -115,17 +85,48 @@ class CharacterViewModel(
         _currentPageNum.value = pageNum
     }
 
-    fun onCharacterClicked(character: Character) {
-        _currentCharacter.value = character
-        switchDescriptionDisplayStatus(true)
-        switchSearchingStatus(false)
+    fun pageUp() {
+        _currentPageNum.value = _currentPageNum.value!!.inc()
+        refreshPage()
+    }
+
+    fun pageDown() {
+        _currentPageNum.value = _currentPageNum.value!!.dec()
+        refreshPage()
+    }
+
+    fun filterCharacters(input: String?) {
+        if (input.isNullOrBlank())
+            return
+        if (!isUserSearching.value!!)
+            switchSearchingStatus(true)
+
+        val filteredList = _characterList.value!!
+            .filter { (name) ->
+                val splitName = name.split(" ")
+                if (splitName.size == 1)
+                    splitName[0].startsWith(input, true)
+                else
+                    splitName[0].startsWith(input, true)
+                            || splitName[1].startsWith(input, true)
+            }
+
+        _currentPage.value = filteredList
     }
 
     fun switchSearchingStatus(newValue: Boolean) {
         _isUserSearching.value = newValue
+        Log.d("debug", "GOT HERE!")
     }
 
-    fun switchDescriptionDisplayStatus(newValue: Boolean) {
-        isDescriptionDisplayed.value = newValue
+    fun switchDescriptionDisplayStatus() {
+        isDescriptionDisplayed.value = !isDescriptionDisplayed.value!!
+    }
+
+    fun onCharacterClicked(character: Character) {
+        _currentCharacter.value = character
+        switchDescriptionDisplayStatus()
+        switchSearchingStatus(false)
+        refreshPage()
     }
 }

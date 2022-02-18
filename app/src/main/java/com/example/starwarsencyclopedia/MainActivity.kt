@@ -2,14 +2,12 @@ package com.example.starwarsencyclopedia
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import androidx.appcompat.widget.SearchView
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.starwarsencyclopedia.model.CharacterViewModel
+import com.google.android.material.textfield.TextInputEditText
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,44 +25,13 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-
-        menuInflater.inflate(R.menu.search_toolbar, menu)
-
-        val menuItem = menu.findItem(R.id.action_search)
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            menuItem.isVisible = destination.id != R.id.characterDescriptionFragment
-            invalidateOptionsMenu()
-        }
-
-        menuItem.setOnMenuItemClickListener {
-            viewModel.switchSearchingStatus(true)
-            false
-        }
-
-        menuItem.isVisible = viewModel.isApiCallOver.value!!
-
-        val searchView = menuItem.actionView as SearchView
-        searchView.queryHint = "Anakin Skywalker"
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-
-            override fun onQueryTextSubmit(query: String?): Boolean = false
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.filterCharacters(newText)
-                return false
-            }
-        })
-
-        return super.onCreateOptionsMenu(menu)
-    }
-
     override fun onBackPressed() {
         with (viewModel) {
             if (isUserSearching.value!!) {
-                refreshList()
-                switchSearchingStatus(false)
+                refreshPage()
+                viewModel.switchSearchingStatus(false)
+                findViewById<TextInputEditText>(R.id.searchInput)
+                    .setText("")
             } else if (currentPageNum.value!! > 0 && !isDescriptionDisplayed.value!!) {
                 pageDown()
             } else
