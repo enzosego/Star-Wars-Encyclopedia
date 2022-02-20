@@ -1,12 +1,13 @@
 package com.example.starwarsencyclopedia.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsencyclopedia.databinding.CharacterViewItemBinding
-import com.example.starwarsencyclopedia.network.characterapi.Character
+import com.example.starwarsencyclopedia.model.network.characterapi.Character
 
 
 class CharacterListAdapter(private val clickListener: CharacterListener) :
@@ -17,7 +18,7 @@ class CharacterListAdapter(private val clickListener: CharacterListener) :
         ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(clickListener: CharacterListener, character: Character) {
             binding.character = character
-            binding.clickLister = clickListener
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
     }

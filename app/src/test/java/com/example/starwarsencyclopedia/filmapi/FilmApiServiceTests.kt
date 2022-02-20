@@ -1,7 +1,7 @@
 package com.example.starwarsencyclopedia.filmapi
 
 import com.example.starwarsencyclopedia.BaseTest
-import com.example.starwarsencyclopedia.network.filmapi.FilmApiService
+import com.example.starwarsencyclopedia.model.network.filmapi.FilmApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import junit.framework.Assert.*

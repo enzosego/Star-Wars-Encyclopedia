@@ -2,8 +2,8 @@ package com.example.starwarsencyclopedia.characterapi
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.starwarsencyclopedia.BaseTest
-import com.example.starwarsencyclopedia.model.CharacterViewModel
-import com.example.starwarsencyclopedia.network.characterapi.CharacterApiService
+import com.example.starwarsencyclopedia.viewmodel.CharacterViewModel
+import com.example.starwarsencyclopedia.model.network.characterapi.CharacterApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import junit.framework.Assert.assertEquals

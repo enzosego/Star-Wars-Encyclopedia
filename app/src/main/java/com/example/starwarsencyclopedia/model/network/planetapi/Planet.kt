@@ -1,4 +1,4 @@
-package com.example.starwarsencyclopedia.network.planetapi
+package com.example.starwarsencyclopedia.model.network.planetapi
 
 import com.squareup.moshi.Json
 
@@ -10,6 +10,5 @@ data class Planet(
     val climate: String,
     val gravity: String,
     val terrain: String,
-    @Json(name = "surface_water") val surfaceWater: String,
     val population: String
 )

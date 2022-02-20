@@ -1,7 +1,7 @@
 package com.example.starwarsencyclopedia.planetapi
 
 import com.example.starwarsencyclopedia.BaseTest
-import com.example.starwarsencyclopedia.network.planetapi.PlanetApiService
+import com.example.starwarsencyclopedia.model.network.planetapi.PlanetApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import junit.framework.Assert.assertEquals

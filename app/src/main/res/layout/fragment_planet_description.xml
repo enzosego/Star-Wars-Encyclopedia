@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.starwarsencyclopedia.viewmodel.PlanetViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        layoutVisibility="@{viewModel.status}"
+        app:contentPadding="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{viewModel.currentPlanet.name}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Earth" />
+
+            <TextView
+                android:id="@+id/rotationPeriod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/rotation_period(viewModel.currentPlanet.rotationPeriod)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                tools:text="Rotation period: 22 hours" />
+
+            <TextView
+                android:id="@+id/orbitalPeriod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/orbital_period(viewModel.currentPlanet.orbitalPeriod)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rotationPeriod"
+                tools:text="Orbital period: 174 days" />
+
+            <TextView
+                android:id="@+id/diameter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/diameter(viewModel.currentPlanet.diameter)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/orbitalPeriod"
+                tools:text="Diameter: 151234km" />
+
+            <TextView
+                android:id="@+id/climate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/climate(viewModel.currentPlanet.climate)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/diameter"
+                tools:text="Climate: Wet" />
+
+            <TextView
+                android:id="@+id/gravity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/gravity(viewModel.currentPlanet.gravity)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/climate"
+                tools:text="Gravity: 1.5" />
+
+            <TextView
+                android:id="@+id/terrain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/terrain(viewModel.currentPlanet.terrain)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gravity"
+                tools:text="Terrain: Jungle" />
+
+            <TextView
+                android:id="@+id/population"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/population(viewModel.currentPlanet.population)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/terrain"
+                tools:text="Population: 32452" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            apiStatus="@{viewModel.status}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

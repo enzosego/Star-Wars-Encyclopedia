@@ -1,11 +1,11 @@
-package com.example.starwarsencyclopedia.network.planetapi
+package com.example.starwarsencyclopedia.model.network.planetapi
 
-import com.example.starwarsencyclopedia.network.util.ApiUtil
+import com.example.starwarsencyclopedia.model.network.util.ApiUtil
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface PlanetApiService{
-    @GET("planets/{id}")
+    @GET("planets/{id}/")
     suspend fun getPlanet(
         @Path("id") planetNum: Int
     ): Planet

@@ -1,23 +1,18 @@
 package com.example.starwarsencyclopedia.ui.character
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doAfterTextChanged
-import androidx.databinding.Observable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.starwarsencyclopedia.R
 import com.example.starwarsencyclopedia.adapter.CharacterListAdapter
 import com.example.starwarsencyclopedia.adapter.CharacterListener
 import com.example.starwarsencyclopedia.databinding.FragmentCharacterListBinding
-import com.example.starwarsencyclopedia.model.CharacterViewModel
+import com.example.starwarsencyclopedia.viewmodel.CharacterViewModel
 
 class CharacterListFragment : Fragment() {
 

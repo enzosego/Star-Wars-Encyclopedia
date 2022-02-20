@@ -1,7 +1,7 @@
 package com.example.starwarsencyclopedia.characterapi
 
 import com.example.starwarsencyclopedia.BaseTest
-import com.example.starwarsencyclopedia.network.characterapi.CharacterApiService
+import com.example.starwarsencyclopedia.model.network.characterapi.CharacterApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import junit.framework.Assert.*

@@ -1,4 +1,4 @@
-package com.example.starwarsencyclopedia.network.filmapi
+package com.example.starwarsencyclopedia.model.network.filmapi
 
 import com.squareup.moshi.Json
 

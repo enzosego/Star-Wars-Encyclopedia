@@ -1,7 +1,7 @@
 package com.example.starwarsencyclopedia.vehicleapi
 
 import com.example.starwarsencyclopedia.BaseTest
-import com.example.starwarsencyclopedia.network.vehicleapi.VehicleApiService
+import com.example.starwarsencyclopedia.model.network.vehicleapi.VehicleApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import junit.framework.Assert.assertEquals

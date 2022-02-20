@@ -7,8 +7,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.starwarsencyclopedia.adapter.CharacterListAdapter
-import com.example.starwarsencyclopedia.model.CharacterApiStatus
-import com.example.starwarsencyclopedia.network.characterapi.Character
+import com.example.starwarsencyclopedia.adapter.FilmListAdapter
+import com.example.starwarsencyclopedia.adapter.StarshipListAdapter
+import com.example.starwarsencyclopedia.adapter.VehicleListAdapter
+import com.example.starwarsencyclopedia.model.network.characterapi.Character
+import com.example.starwarsencyclopedia.viewmodel.ApiStatus
 import com.google.android.material.textfield.TextInputEditText
 
 @BindingAdapter("characterListData")
@@ -17,52 +20,70 @@ fun bindCharacterRecyclerView(recyclerView: RecyclerView, data: List<Character>?
     adapter.submitList(data)
 }
 
+@BindingAdapter("filmListData")
+fun bindFilmRecyclerView(recyclerView: RecyclerView, data: List<Int>?) {
+    val adapter = recyclerView.adapter as FilmListAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("vehicleListData")
+fun bindVehicleRecyclerView(recyclerView: RecyclerView, data: List<Int>?) {
+    val adapter = recyclerView.adapter as VehicleListAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("starshipListData")
+fun bindStarshipRecyclerView(recyclerView: RecyclerView, data: List<Int>?) {
+    val adapter = recyclerView.adapter as StarshipListAdapter
+    adapter.submitList(data)
+}
+
 @BindingAdapter("apiStatus")
-fun bindStatus(statusImageView: ImageView, status: CharacterApiStatus?) {
+fun bindStatus(statusImageView: ImageView, status: ApiStatus?) {
     when(status) {
-        CharacterApiStatus.LOADING -> {
+        ApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.loading_animation)
         }
-        CharacterApiStatus.DONE -> {
+        ApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
-        CharacterApiStatus.ERROR -> {
+        ApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
     }
 }
 
-@BindingAdapter("searchInputVisibility")
-fun searchInputVisibility(inputField: TextInputEditText, status: CharacterApiStatus) {
+@BindingAdapter("layoutVisibility")
+fun layoutVisibility(layout: View, status: ApiStatus) {
     when (status) {
-        CharacterApiStatus.LOADING -> {
-            inputField.visibility = View.GONE
+        ApiStatus.LOADING -> {
+            layout.visibility = View.GONE
         }
-        CharacterApiStatus.ERROR -> {
-            inputField.visibility = View.GONE
+        ApiStatus.ERROR -> {
+            layout.visibility = View.GONE
         }
-        CharacterApiStatus.DONE -> {
-            inputField.visibility = View.VISIBLE
+        ApiStatus.DONE -> {
+            layout.visibility = View.VISIBLE
         }
     }
 }
 
 @BindingAdapter(value = ["status", "isUserSearching"])
-fun bottomMenuVisibility(bottomMenu: ConstraintLayout, status: CharacterApiStatus?, isUserSearching: Boolean) {
+fun bottomMenuVisibility(bottomMenu: ConstraintLayout, status: ApiStatus?, isUserSearching: Boolean) {
     when(status) {
-        CharacterApiStatus.LOADING -> {
+        ApiStatus.LOADING -> {
             bottomMenu.visibility = View.GONE
         }
-        CharacterApiStatus.DONE -> {
+        ApiStatus.DONE -> {
             if (!isUserSearching) {
                 bottomMenu.visibility = View.VISIBLE
             } else {
                 bottomMenu.visibility = View.GONE
             }
         }
-        CharacterApiStatus.ERROR -> {
+        ApiStatus.ERROR -> {
             bottomMenu.visibility = View.GONE
         }
     }

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.starwarsencyclopedia.viewmodel.FilmViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        layoutVisibility="@{viewModel.status}"
+        app:contentPadding="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/title(viewModel.currentFilm.title)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Title: Return of the Jedi" />
+
+            <TextView
+                android:id="@+id/episodeId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{viewModel.currentFilm.episodeId}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="Episode IV" />
+
+            <TextView
+                android:id="@+id/openingCrawl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/opening_crawl(viewModel.currentFilm.openingCrawl)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/episodeId"
+                tools:text="Opening Crawl: opening crawl opening crawl opening crawl opening crawl opening crawl " />
+
+            <TextView
+                android:id="@+id/director"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/director(viewModel.currentFilm.director)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/openingCrawl"
+                tools:text="Director: Director" />
+
+            <TextView
+                android:id="@+id/producer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/producer(viewModel.currentFilm.producer)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/director"
+                tools:text="Producer: Lucas Films" />
+
+            <TextView
+                android:id="@+id/releaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/release_date(viewModel.currentFilm.releaseDate)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/producer"
+                tools:text="Release Date: 17/02/87" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            apiStatus="@{viewModel.status}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

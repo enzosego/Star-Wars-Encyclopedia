@@ -1,13 +1,13 @@
-package com.example.starwarsencyclopedia.network.filmapi
+package com.example.starwarsencyclopedia.model.network.filmapi
 
-import com.example.starwarsencyclopedia.network.util.ApiUtil
+import com.example.starwarsencyclopedia.model.network.util.ApiUtil
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface FilmApiService{
-    @GET("films/{id}")
+    @GET("films/{id}/")
     suspend fun getFilm(
-        @Path("id") filmNumber: Int
+        @Path("id") filmNum: Int
     ): Film
 }
 

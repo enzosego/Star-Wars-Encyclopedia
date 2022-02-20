@@ -1,4 +1,4 @@
-package com.example.starwarsencyclopedia.network.characterapi
+package com.example.starwarsencyclopedia.model.network.characterapi
 
 import com.squareup.moshi.Json
 
@@ -12,5 +12,9 @@ data class Character(
     @Json(name = "skin_color") val skinColor: String,
     @Json(name = "eye_color") val eyeColor: String,
     @Json(name = "birth_year") val birthYear: String,
-    val gender: String
+    val gender: String,
+    val homeworld: String,
+    val films: List<String>,
+    val vehicles: List<String>,
+    val starships: List<String>
 )

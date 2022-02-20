@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.starwarsencyclopedia.viewmodel.VehicleViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        layoutVisibility="@{viewModel.status}"
+        app:contentPadding="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{viewModel.currentVehicle.name}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="All new Starship" />
+
+            <TextView
+                android:id="@+id/model"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/model(viewModel.currentVehicle.model)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                tools:text="Model: S" />
+
+            <TextView
+                android:id="@+id/manufacturer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/manufacturer(viewModel.currentVehicle.manufacturer)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/model"
+                tools:text="Manufacturer: Ferrari" />
+
+            <TextView
+                android:id="@+id/cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/cost(viewModel.currentVehicle.cost)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/manufacturer"
+                tools:text="Cost: 1500 credits" />
+
+            <TextView
+                android:id="@+id/length"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/length(viewModel.currentVehicle.length)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cost"
+                tools:text="Length 350 meters" />
+
+            <TextView
+                android:id="@+id/maxSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/max_speed(viewModel.currentVehicle.maxSpeed)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/length"
+                tools:text="Max atmosphering speed: 400" />
+
+            <TextView
+                android:id="@+id/crew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/crew(viewModel.currentVehicle.crew)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/maxSpeed"
+                tools:text="Crew: 50" />
+
+            <TextView
+                android:id="@+id/passengers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/passengers(viewModel.currentVehicle.passengers)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/crew"
+                tools:text="Passengers: 120" />
+
+            <TextView
+                android:id="@+id/cargoCapacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/cargo_capacity(viewModel.currentVehicle.cargoCapacity)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passengers"
+                tools:text="Cargo capacity: 15000kg" />
+
+            <TextView
+                android:id="@+id/consumables"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/consumables(viewModel.currentVehicle.consumables)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cargoCapacity"
+                tools:text="Consumables: 200" />
+
+            <TextView
+                android:id="@+id/starship_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:textStyle="bold"
+                android:text="@{@string/starship_class(viewModel.currentVehicle.vehicleClass)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/consumables"
+                tools:text="Starship class: Class" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            apiStatus="@{viewModel.status}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

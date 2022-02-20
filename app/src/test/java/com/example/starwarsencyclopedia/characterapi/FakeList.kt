@@ -1,6 +1,6 @@
 package com.example.starwarsencyclopedia.characterapi
 
-import com.example.starwarsencyclopedia.network.characterapi.Character
+import com.example.starwarsencyclopedia.model.network.characterapi.Character
 
 object FakeList {
     val list = listOf(

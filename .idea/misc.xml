@@ -7,10 +7,17 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1828125" />
         <entry key="app/src/main/res/layout/character_list_screen.xml" value="0.12047101449275362" />
         <entry key="app/src/main/res/layout/character_view_item.xml" value="0.1828125" />
+        <entry key="app/src/main/res/layout/film_view_item.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_character_description.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_character_list.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/fragment_film_description.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_list_screen.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_planet_description.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_starship_description.xml" value="0.4375" />
+        <entry key="app/src/main/res/layout/fragment_vehicle_description.xml" value="0.22" />
         <entry key="app/src/main/res/layout/list_view_item.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/starship_view_item.xml" value="0.12047101449275362" />
+        <entry key="app/src/main/res/layout/vehicle_view_item.xml" value="0.12047101449275362" />
         <entry key="app/src/main/res/menu/search_toolbar.xml" value="0.18" />
       </map>
     </option>

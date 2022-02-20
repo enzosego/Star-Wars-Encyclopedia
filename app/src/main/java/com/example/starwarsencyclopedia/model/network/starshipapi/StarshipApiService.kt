@@ -1,11 +1,11 @@
-package com.example.starwarsencyclopedia.network.starshipapi
+package com.example.starwarsencyclopedia.model.network.starshipapi
 
-import com.example.starwarsencyclopedia.network.util.ApiUtil
+import com.example.starwarsencyclopedia.model.network.util.ApiUtil
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface StarshipApiService{
-    @GET("starships/{id}")
+    @GET("starships/{id}/")
     suspend fun getStarship(
         @Path("id") starshipNum: Int
     ): Starship

@@ -1,23 +1,22 @@
-package com.example.starwarsencyclopedia.model
+package com.example.starwarsencyclopedia.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.starwarsencyclopedia.network.characterapi.CharacterApi
-import com.example.starwarsencyclopedia.network.characterapi.Character
+import com.example.starwarsencyclopedia.model.network.characterapi.CharacterApi
+import com.example.starwarsencyclopedia.model.network.characterapi.Character
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-enum class CharacterApiStatus {LOADING, ERROR, DONE}
+enum class ApiStatus {LOADING, ERROR, DONE}
 
 class CharacterViewModel(
     fakeList: List<Character> = mutableListOf()
 ): ViewModel() {
 
-    private val _status = MutableLiveData<CharacterApiStatus>()
-    val status: LiveData<CharacterApiStatus> = _status
+    private val _status = MutableLiveData<ApiStatus>()
+    val status: LiveData<ApiStatus> = _status
 
     private val _characterList = MutableLiveData<List<Character>>()
 
@@ -29,6 +28,21 @@ class CharacterViewModel(
 
     private val _currentCharacter = MutableLiveData<Character>()
     val currentCharacter: LiveData<Character> = _currentCharacter
+
+    private val _planetId = MutableLiveData<Int>()
+    val planetId: LiveData<Int> = _planetId
+
+    private val _filmIdList = MutableLiveData<List<Int>>()
+    val filmIdList: LiveData<List<Int>> = _filmIdList
+
+    private val _vehicleIdList = MutableLiveData<List<Int>>()
+    val vehicleIdList: LiveData<List<Int>> = _vehicleIdList
+
+    private val _starshipIdList = MutableLiveData<List<Int>>()
+    val starshipIdList: LiveData<List<Int>> = _starshipIdList
+
+    private val _currentIds = MutableLiveData<Map<String, Int>>()
+    val currentIds: LiveData<Map<String, Int>> = _currentIds
 
     val isDescriptionDisplayed = MutableLiveData(false)
 
@@ -46,7 +60,7 @@ class CharacterViewModel(
 
     private fun getCharacters() {
         viewModelScope.launch {
-            _status.value = CharacterApiStatus.LOADING
+            _status.value = ApiStatus.LOADING
             try {
                 val newList = mutableListOf<Character>()
                 newList.addAll(
@@ -60,9 +74,9 @@ class CharacterViewModel(
 
                 _characterList.value = newList
                 refreshPage()
-                _status.value = CharacterApiStatus.DONE
-            } catch (e: Exception) {
-                _status.value = CharacterApiStatus.ERROR
+                _status.value = ApiStatus.DONE
+            }catch (e: Exception) {
+                _status.value = ApiStatus.ERROR
                 _characterList.value = listOf()
             }
         }
@@ -111,12 +125,11 @@ class CharacterViewModel(
                             || splitName[1].startsWith(input, true)
             }
 
-        _currentPage.value = filteredList
+        _currentPage.postValue(filteredList)
     }
 
     fun switchSearchingStatus(newValue: Boolean) {
-        _isUserSearching.value = newValue
-        Log.d("debug", "GOT HERE!")
+        _isUserSearching.postValue(newValue)
     }
 
     fun switchDescriptionDisplayStatus() {
@@ -125,8 +138,62 @@ class CharacterViewModel(
 
     fun onCharacterClicked(character: Character) {
         _currentCharacter.value = character
+        getAllIds()
         switchDescriptionDisplayStatus()
         switchSearchingStatus(false)
         refreshPage()
     }
+
+    fun onFilmClicked(id: Int) {
+        val newIdMap = mutableMapOf<String, Int>()
+        if (!_currentIds.value.isNullOrEmpty())
+            newIdMap.putAll(_currentIds.value!!)
+        newIdMap["film"] = id
+
+        _currentIds.value = newIdMap
+    }
+
+    fun onVehicleClicked(id: Int) {
+        val newIdMap = mutableMapOf<String, Int>()
+        if (!_currentIds.value.isNullOrEmpty())
+            newIdMap.putAll(_currentIds.value!!)
+        newIdMap["vehicle"] = id
+
+        _currentIds.value = newIdMap
+    }
+
+    fun onStarshipClicked(id: Int) {
+        val newIdMap = mutableMapOf<String, Int>()
+        if (!_currentIds.value.isNullOrEmpty())
+            newIdMap.putAll(_currentIds.value!!)
+        newIdMap["starship"] = id
+
+        _currentIds.value = newIdMap
+    }
+
+    private fun getAllIds() {
+        with(_currentCharacter.value!!) {
+            val newFilmList = mutableListOf<Int>()
+            for (film in films)
+                newFilmList.add(getApiId(film))
+
+            val newVehicleList = mutableListOf<Int>()
+            if (vehicles.isNotEmpty())
+                for (vehicle in vehicles)
+                    newVehicleList.add(getApiId(vehicle))
+
+            val newStarshipList = mutableListOf<Int>()
+            if (starships.isNotEmpty())
+                for (starship in starships)
+                    newStarshipList.add(getApiId(starship))
+
+            _planetId.value = getApiId(homeworld)
+            _filmIdList.value = newFilmList
+            _vehicleIdList.value = newVehicleList
+            _starshipIdList.value = newStarshipList
+        }
+    }
+
+    private fun getApiId(apiText: String): Int =
+        apiText.filter { it.isDigit() }.toInt()
 }

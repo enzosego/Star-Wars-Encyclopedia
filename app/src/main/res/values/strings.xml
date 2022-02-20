@@ -11,4 +11,30 @@
     <string name="back_button">Back</string>
     <string name="search_title">Search</string>
     <string name="input_hint">Anakin Skywalker</string>
+
+    <string name="title">Title: %1$s</string>
+    <string name="opening_crawl">Opening Crawl: %1$s</string>
+    <string name="director">Director: %1$s</string>
+    <string name="producer">Producer: %1$s</string>
+    <string name="release_date">Release Date: %1$s</string>
+
+    <string name="rotation_period">Rotation Period: %1$s hours</string>
+    <string name="orbital_period">Orbital Period: %1$s days</string>
+    <string name="diameter">Diameter: %1$skm</string>
+    <string name="climate">Climate: %1$s</string>
+    <string name="gravity">Gravity: %1$s</string>
+    <string name="terrain">Terrain: %1$s</string>
+    <string name="population">Population: %1$s</string>
+
+    <string name="model">Model: %1$s</string>
+    <string name="manufacturer">Manufacturer: %1$s</string>
+    <string name="cost">Cost: %1$s credits</string>
+    <string name="length">Length: %1$s meters</string>
+    <string name="max_speed">Max atmosphering speed: %1$skm/h</string>
+    <string name="crew">Crew: %1$s</string>
+    <string name="passengers">Passengers: %1$s</string>
+    <string name="cargo_capacity">Cargo capacity: %1$skg</string>
+    <string name="consumables">Consumables: %1$s</string>
+    <string name="hyperdrive">Hyperdrive rating: %1$s</string>
+    <string name="starship_class">Starship class: %1$s</string>
 </resources>

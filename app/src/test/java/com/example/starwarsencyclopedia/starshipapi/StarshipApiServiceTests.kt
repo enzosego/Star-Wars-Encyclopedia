@@ -1,7 +1,7 @@
 package com.example.starwarsencyclopedia.starshipapi
 
 import com.example.starwarsencyclopedia.BaseTest
-import com.example.starwarsencyclopedia.network.starshipapi.StarshipApiService
+import com.example.starwarsencyclopedia.model.network.starshipapi.StarshipApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import junit.framework.Assert.assertEquals

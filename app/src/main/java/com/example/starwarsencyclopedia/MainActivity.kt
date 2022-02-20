@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.starwarsencyclopedia.model.CharacterViewModel
+import com.example.starwarsencyclopedia.viewmodel.CharacterViewModel
 import com.google.android.material.textfield.TextInputEditText
 
 class MainActivity : AppCompatActivity() {

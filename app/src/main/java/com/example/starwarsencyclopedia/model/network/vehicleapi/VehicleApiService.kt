@@ -1,11 +1,11 @@
-package com.example.starwarsencyclopedia.network.vehicleapi
+package com.example.starwarsencyclopedia.model.network.vehicleapi
 
-import com.example.starwarsencyclopedia.network.util.ApiUtil
+import com.example.starwarsencyclopedia.model.network.util.ApiUtil
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface VehicleApiService{
-    @GET("vehicles/{id}")
+    @GET("vehicles/{id}/")
     suspend fun getVehicle(
         @Path("id") vehicleNum: Int
     ): Vehicle

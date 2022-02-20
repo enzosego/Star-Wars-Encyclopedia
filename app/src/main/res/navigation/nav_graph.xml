@@ -15,5 +15,34 @@
     <fragment
         android:id="@+id/characterDescriptionFragment"
         android:name="com.example.starwarsencyclopedia.ui.character.CharacterDescriptionFragment"
-        android:label="Description" />
+        android:label="Description" >
+        <action
+            android:id="@+id/action_characterDescriptionFragment_to_planetDescriptionFragment"
+            app:destination="@id/planetDescriptionFragment" />
+        <action
+            android:id="@+id/action_characterDescriptionFragment_to_starshipDescriptionFragment"
+            app:destination="@id/starshipDescriptionFragment" />
+        <action
+            android:id="@+id/action_characterDescriptionFragment_to_vehicleDescriptionFragment"
+            app:destination="@id/vehicleDescriptionFragment" />
+        <action
+            android:id="@+id/action_characterDescriptionFragment_to_filmDescriptionFragment"
+            app:destination="@id/filmDescriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filmDescriptionFragment"
+        android:name="com.example.starwarsencyclopedia.ui.film.FilmDescriptionFragment"
+        android:label="FilmDescriptionFragment" />
+    <fragment
+        android:id="@+id/planetDescriptionFragment"
+        android:name="com.example.starwarsencyclopedia.ui.planet.PlanetDescriptionFragment"
+        android:label="PlanetDescriptionFragment" />
+    <fragment
+        android:id="@+id/starshipDescriptionFragment"
+        android:name="com.example.starwarsencyclopedia.ui.starship.StarshipDescriptionFragment"
+        android:label="StarshipDescriptionFragment" />
+    <fragment
+        android:id="@+id/vehicleDescriptionFragment"
+        android:name="com.example.starwarsencyclopedia.ui.vehicle.VehicleDescriptionFragment"
+        android:label="VehicleDescriptionFragment" />
 </navigation>

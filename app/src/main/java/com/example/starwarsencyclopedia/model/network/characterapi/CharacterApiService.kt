@@ -1,6 +1,6 @@
-package com.example.starwarsencyclopedia.network.characterapi
+package com.example.starwarsencyclopedia.model.network.characterapi
 
-import com.example.starwarsencyclopedia.network.util.ApiUtil
+import com.example.starwarsencyclopedia.model.network.util.ApiUtil
 import retrofit2.http.GET
 import retrofit2.http.Query
 

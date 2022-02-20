@@ -6,9 +6,9 @@
         <data>
             <variable
                 name="character"
-                type="com.example.starwarsencyclopedia.network.characterapi.Character" />
+                type="com.example.starwarsencyclopedia.model.network.characterapi.Character" />
             <variable
-                name="clickLister"
+                name="clickListener"
                 type="com.example.starwarsencyclopedia.adapter.CharacterListener" />
         </data>
 
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:onClick="@{() -> clickLister.onClick(character)}"
+            android:onClick="@{() -> clickListener.onClick(character)}"
             app:cardBackgroundColor="@color/purple_500"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
